@@ -1,5 +1,6 @@
 import express from 'express';
 import { Configuration, OpenAIApi } from 'openai';
+import xss from 'xss';
 import 'dotenv/config';
 
 // create app
@@ -22,6 +23,8 @@ app.post('/api/ask-chat', async (req, res) => {
         error: 'Prompt is required'
       });
     }
+
+    prompt = xss(prompt);
 
     // generate response
     const gptResponse = await openai.createChatCompletion({

@@ -17,7 +17,7 @@ const openai = new OpenAIApi(configuration);
 app.post('/api/ask-chat', async (req, res) => {
   try {
     // get prompt from request body
-    const prompt = req.body.prompt;
+    let prompt = req.body.prompt;
     if (!prompt) {
       return res.status(400).json({
         error: 'Prompt is required'
